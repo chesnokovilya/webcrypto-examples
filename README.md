@@ -1,5 +1,7 @@
 # Web Cryptography API Examples
 
+Fixed raw ec key import compared to the original repo.
+
 Live Table: https://diafygi.github.io/webcrypto-examples/
 
 I couldn't find anywhere that had clear examples of WebCryptoAPI, so I
