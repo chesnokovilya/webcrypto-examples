@@ -1299,7 +1299,17 @@
                         .catch(err("ecdh", "importKey", "jwk-priv"));
 
                         //raw
-                        window.crypto.subtle.importKey("raw", null, ECDH, false, ["deriveBits", "deriveKey"])
+                        window.crypto.subtle.importKey("raw", new Uint8Array([
+                        0x04,
+                        0x80, 0x2C, 0x40, 0x76, 0x31, 0x20, 0xB6, 0x9B,
+                        0x48, 0x3B, 0x05, 0xEB, 0x6C, 0x1E, 0x3F, 0x49,
+                        0x84, 0xF7, 0xD2, 0xAD, 0x16, 0xA1, 0x6F, 0x62,
+                        0xFD, 0xCA, 0xEC, 0xB4, 0xA0, 0xBD, 0x4C, 0x1A,
+                        0x6F, 0xAA, 0xE7, 0xFD, 0xC4, 0x7D, 0x89, 0xCC,
+                        0x06, 0xCA, 0xFE, 0xAE, 0xCD, 0x0E, 0x9E, 0x62,
+                        0x57, 0xA4, 0xC3, 0xE7, 0x5E, 0x69, 0x10, 0xEE,
+                        0x67, 0xC2, 0x09, 0xF9, 0xEF, 0xE7, 0x9E, 0x56
+                        ]), ECDH, false, ["deriveBits", "deriveKey"])
                         .then(ok("ecdh", "importKey", "raw-pub"))
                         .catch(err("ecdh", "importKey", "raw-pub*"));
 
@@ -4778,7 +4788,7 @@
                         var keydata = window.crypto.getRandomValues(new Uint8Array(16));
                         window.crypto.subtle.importKey("raw", keydata, {name: "CONCAT"}, false, ["deriveBits", "deriveKey"])
                         .then(ok("concatkdf", "importKey", "raw"))
-                        .catch(err("concatkdf", "importKey", "raw*"));
+                        .catch(err("concatkdf", "importKey", "raw"));
                     </script>
                 </td>
                 <td class="exportKey disabled"></td>
@@ -4848,7 +4858,7 @@
                         var keydata = window.crypto.getRandomValues(new Uint8Array(16));
                         window.crypto.subtle.importKey("raw", keydata, {name: "HKDF-CTR"}, false, ["deriveBits", "deriveKey"])
                         .then(ok("hkdf-ctr", "importKey", "raw"))
-                        .catch(err("hkdf-ctr", "importKey", "raw*"));
+                        .catch(err("hkdf-ctr", "importKey", "raw"));
                     </script>
                 </td>
                 <td class="exportKey disabled"></td>
@@ -4865,9 +4875,6 @@
         </table>
         <p>
             ( <span class="disabled"></span> = not applicable )
-        </p>
-        <p>
-            *I don't have an example to test importKey. Pull requests welcome!
         </p>
         <p>
             Source code and examples:
